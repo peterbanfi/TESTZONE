@@ -6,7 +6,9 @@ let posTop = parseInt(style.getPropertyValue('top').slice(0, -2));
 let posLeft = parseInt(style.getPropertyValue('left').slice(0, -2));
 console.log(typeof posRight, posLeft);
 
-
+/**
+ * keyState saves keycodes and their values which is a boolean
+ */
 let keyState = {};
 window.addEventListener('keydown', function (e) {
     keyState[e.keyCode || e.which] = true;
@@ -86,18 +88,35 @@ window.addEventListener('keyup', function (e) {
     }, true); */
 function gameLoop() {
     //to left
+    /*     switch (keyState[Number]) {
+            case keyState[37]:
+                posLeft = posLeft - 20;
+                jack.style.transform = "scaleX(1)";
+                jack.classList.add('jack-left');
+                jack.style.left = `${posLeft}px`;
+                console.log('to left: ', posLeft);
+                console.log(keyState[37]);
+                break;
+            case !keyState[37]:
+                jack.style.background = "url('/img/jack1.png')";
+                jack.classList.remove('jack-left');
+                console.log(keyState[37]);
+                break;
+            default:
+                jack.style.background = "url('/img/jack1.png')";
+                jack.classList.remove('jack-left');
+        } */
+    // to left
     if (keyState[37]) {
         posLeft = posLeft - 20;
         jack.style.transform = "scaleX(1)";
         jack.classList.add('jack-left');
         jack.style.left = `${posLeft}px`;
         console.log('to left: ', posLeft);
-        console.log(keyState[37]);
     }
     if (!keyState[37]) {
         jack.style.background = "url('/img/jack1.png')";
         jack.classList.remove('jack-left');
-        console.log(keyState[37]);
     }
     //to right
     if (keyState[39]) {
@@ -134,6 +153,17 @@ function gameLoop() {
     if (!keyState[38]) {
         jack.style.background = "url('/img/jack1.png')";
         jack.classList.remove('jack-right');
+    }
+    // jump
+    if (keyState[32]) {
+        jack.style.background = "url('/img/jack3.png')";
+        jack.classList.add('jack-jump');
+        jack.style.top = `${posTop}px`;
+        console.log('to down: ', posTop);
+    }
+    if (!keyState[32]) {
+        jack.style.background = "url('/img/jack1.png')";
+        jack.classList.remove('jack-jump');
     }
     setTimeout(gameLoop, 100);
 }
