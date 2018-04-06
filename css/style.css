@@ -1,0 +1,61 @@
+body {
+    margin: 0;
+    background: whitesmoke;
+    overflow: hidden;
+}
+
+.container {
+    background-size: cover;
+    border: 20px solid black;
+    height: 96vh;
+}
+
+#jack {
+    position: relative;
+    height: 100px;
+    width: 100px;
+    /*  transition: background .6s; */
+    background: url('/img/jack1.png')
+}
+
+.jack-right {
+    animation: goRight .5s linear infinite;
+}
+
+.jack-left {
+    animation: goLeft .5s linear infinite;
+}
+
+.jack-jump {
+    animation: jump .6s linear;
+}
+
+@keyframes goRight {
+    from {
+        background: url('/img/jack2.png');
+    }
+    to {
+        background: url('/img/jack2_2.png');
+    }
+}
+
+@keyframes goLeft {
+    from {
+        background: url('/img/jack2.png');
+    }
+    to {
+        background: url('/img/jack2_2.png');
+    }
+}
+
+@keyframes jump {
+    0% {
+        top: 0px;
+    }
+    50% {
+        top: -30px;
+    }
+    100% {
+        top: 0px;
+    }
+}
