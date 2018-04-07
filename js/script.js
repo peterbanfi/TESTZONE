@@ -91,41 +91,34 @@ gameLoop();
 
 //WOLF
 window.addEventListener("keydown", function (event) {
-    switch (event.key) {
-        case "d":
-            classChanger();
-            posLeftWolf = posLeftWolf + 5;
-            wolf.style.transform = "scaleX(1)";
-            wolf.style.left = `${posLeftWolf}px`;
-            console.log('to right: ', posLeftWolf);
-            break;
-        case "a":
-            classChanger();
-            posLeftWolf = posLeftWolf - 5;
-            wolf.style.transform = "scaleX(-1)";
-            wolf.style.left = `${posLeftWolf}px`;
-            console.log('to left: ', posLeftWolf);
-            break;
-        case "w":
-            classChanger();
-            posTopWolf = posTopWolf - 5;
-            wolf.style.transform = "scaleX(1)";
-            wolf.style.top = `${posTopWolf}px`;
-            console.log('to up: ', posTopWolf);
-            break;
-        case "s":
-            classChanger();
-            posTopWolf = posTopWolf + 5;
-            wolf.style.transform = "scaleX(-1)";
-            wolf.style.top = `${posTopWolf}px`;
-            console.log('to down: ', posTopWolf);
-            break;
-        default:
-            return;
-    }
+    wolfMoves();
     event.preventDefault();
 }, true);
 window.addEventListener("keyup", function (event) {
+    wolfStop();
+    event.preventDefault();
+}, true);
+
+function wolfMoves() {
+    switch (event.key) {
+        case "d":
+            goRight();
+            break;
+        case "a":
+            goLeft();
+            break;
+        case "w":
+            goTop();
+            break;
+        case "s":
+            goDown();
+            break;
+        default:
+            return;
+    }
+}
+
+function wolfStop() {
     switch (event.key) {
         case "d":
             wolfStand();
@@ -142,8 +135,7 @@ window.addEventListener("keyup", function (event) {
         default:
             return;
     }
-    event.preventDefault();
-}, true);
+}
 
 function classChanger() {
     if ($("#wolf").hasClass("wolf-03")) {
@@ -166,4 +158,66 @@ function wolfStand() {
     wolf.classList.remove('wolf-01');
     wolf.classList.remove('wolf-03');
     wolf.classList.remove('wolf-04');
+}
+
+function goRight() {
+    classChanger();
+    posLeftWolf = posLeftWolf + 5;
+    wolf.style.transform = "scaleX(1)";
+    wolf.style.left = `${posLeftWolf}px`;
+    console.log('to right: ', posLeftWolf);
+};
+
+function goLeft() {
+    classChanger();
+    posLeftWolf = posLeftWolf - 5;
+    wolf.style.transform = "scaleX(-1)";
+    wolf.style.left = `${posLeftWolf}px`;
+    console.log('to left: ', posLeftWolf);
+};
+
+function goTop() {
+    classChanger();
+    posTopWolf = posTopWolf - 5;
+    wolf.style.transform = "scaleX(1)";
+    wolf.style.top = `${posTopWolf}px`;
+    console.log('to up: ', posTopWolf);
+};
+
+function goDown() {
+    classChanger();
+    posTopWolf = posTopWolf + 5;
+    wolf.style.transform = "scaleX(-1)";
+    wolf.style.top = `${posTopWolf}px`;
+    console.log('to down: ', posTopWolf);
+};
+
+//random moves buggy AF
+let alive = function () {
+    setInterval(function () {
+        let i = Math.floor((Math.random() * 4));
+        let loop = setInterval(function () {
+            switch (i) {
+                case 0:
+                    goRight();
+                    break;
+                case 1:
+                    goLeft();
+                    break;
+                case 2:
+                    goTop();
+                    break;
+                case 3:
+                    goDown();
+                    break;
+            }
+        }, 100);
+        setTimeout(function () {
+            clearInterval(loop);
+        }, 2000);
+    }, 2000);
+}
+
+function dead() {
+    clearInterval(alive);
 }
