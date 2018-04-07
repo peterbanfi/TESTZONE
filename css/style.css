@@ -59,3 +59,26 @@ body {
         top: 0px;
     }
 }
+
+#wolf {
+    position: relative;
+    height: 100px;
+    width: 100px;
+    left: 0px;
+}
+
+.wolf-01 {
+    background: url('/img/Wolf01.png')
+}
+
+.wolf-02 {
+    background: url('/img/Wolf02.png')
+}
+
+.wolf-03 {
+    background: url('/img/Wolf03.png')
+}
+
+.wolf-04 {
+    background: url('/img/Wolf04.png')
+}
